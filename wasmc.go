@@ -1,7 +1,7 @@
 package main
 
 import (
-	"flag"
+	_ "embed"
 	"fmt"
 	"html/template"
 	"log"
@@ -9,13 +9,13 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	_ "embed"
+	"github.com/spf13/pflag"
 )
 
 //go:embed rt/rt.c
 var rtdata []byte
 
-var verbose = flag.Bool("V", false, "verbose output")
+var verbose = pflag.BoolP("verbose", "V", false, "verbose output")
 
 func temp(dir, name string) string {
 	tmp, err := os.Create(filepath.Join(dir, name))
@@ -41,11 +41,11 @@ func run(c string) {
 }
 
 func main() {
-	out := flag.String("o", "a.out", "output file")
-	name := flag.String("name", "main", "module name")
+	out := pflag.StringP("output", "o", "a.out", "output file")
+	name := pflag.StringP("name", "n", "main", "module name")
 
-	flag.Parse()
-	args := flag.Args()
+	pflag.Parse()
+	args := pflag.Args()
 	if len(args) < 1 {
 		log.Fatal("no input")
 	}
