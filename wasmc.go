@@ -63,9 +63,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	cwasm := temp(dir, fmt.Sprintf("%s.c", in))
-	owasm := temp(dir, fmt.Sprintf("%s.o", in))
-	hwasm := temp(dir, fmt.Sprintf("%s.h", in))
+	cwasm := temp(dir, fmt.Sprintf("%s.c", *name))
+	owasm := temp(dir, fmt.Sprintf("%s.o", *name))
+	hwasm := temp(dir, fmt.Sprintf("%s.h", *name))
 	incw2c2 := fmt.Sprintf("%s/w2c2", w2c2)
 	incwasi := fmt.Sprintf("%s/wasi", w2c2)
 	lwasi := fmt.Sprintf("%s/wasi/build", w2c2)
