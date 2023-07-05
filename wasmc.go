@@ -42,6 +42,7 @@ func run(c string) {
 
 func main() {
 	out := flag.String("o", "a.out", "output file")
+	name := flag.String("name", "main", "module name")
 
 	flag.Parse()
 	args := flag.Args()
@@ -78,8 +79,10 @@ func main() {
 	}
 	err = t.Execute(f, struct {
 		Hwasm string
+		Name  string
 	}{
 		Hwasm: hwasm,
+		Name:  *name,
 	})
 	if err != nil {
 		log.Fatal(err)

@@ -14,13 +14,13 @@ trap(
 }
 
 wasmMemory* wasiMemory(void* instance) {
-    return hello_memory((helloInstance*)instance);
+    return {{ .Name }}_memory(({{ .Name }}Instance*)instance);
 }
 
 int
 main(int argc, char* argv[]) {
-    helloInstance instance;
-    helloInstantiate(&instance, NULL);
+    {{ .Name }}Instance instance;
+    {{ .Name }}Instantiate(&instance, NULL);
     if (!wasiInit(argc, argv, environ)) {
         fprintf(stderr, "failed to initialize WASI\n");
         return 1;
@@ -31,8 +31,8 @@ main(int argc, char* argv[]) {
         return 1;
     }
 
-    hello__start(&instance);
-    helloFreeInstance(&instance);
+    {{ .Name }}__start(&instance);
+    {{ .Name }}FreeInstance(&instance);
 
     return 0;
 }
