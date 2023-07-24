@@ -8,3 +8,15 @@ $ wasmc -n hello -o hello hello.wasm
 $ ./hello
 hello world!
 ```
+
+# Using wasm2c
+
+Build:
+
+```
+cd wasm2c
+mkdir build
+cd build
+cmake .. -G Ninja -DWITH_WASI=ON
+ninja wasm2c libuvwasi_a
+```
