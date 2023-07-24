@@ -43,6 +43,7 @@ func run(c string) {
 func main() {
 	out := pflag.StringP("output", "o", "a.out", "output file")
 	name := pflag.StringP("name", "n", "main", "module name")
+	cc := pflag.String("cc", "clang", "C compiler")
 
 	pflag.Parse()
 	args := pflag.Args()
@@ -89,8 +90,8 @@ func main() {
 	}
 	f.Close()
 	run(fmt.Sprintf("w2c2 %s %s %s", in, cwasm, hwasm))
-	run(fmt.Sprintf("gcc -O3 %s -c -o %s -I%s -lm -static", cwasm, owasm, incw2c2))
-	run(fmt.Sprintf("gcc -O3 %s %s -L%s -lw2c2wasi -I%s -I%s -I%s -o %s -lm -static", owasm, f.Name(), lwasi, incw2c2, incwasi, pwd, *out))
+	run(fmt.Sprintf("%s -fomit-frame-pointer -O3 %s -c -o %s -I%s -lm -static", *cc, cwasm, owasm, incw2c2))
+	run(fmt.Sprintf("%s -fomit-frame-pointer -O3 %s %s -L%s -lw2c2wasi -I%s -I%s -I%s -o %s -lm -static", *cc, owasm, f.Name(), lwasi, incw2c2, incwasi, pwd, *out))
 
 	os.RemoveAll(dir)
 }

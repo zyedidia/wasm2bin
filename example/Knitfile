@@ -1,0 +1,4 @@
+return b{
+    $ hello.wasm: hello.c
+        clang -target wasm32-unknown-wasi -O3 $input --sysroot=/home/zyedidia/Downloads/wasi-sysroot -o $output -c
+}
