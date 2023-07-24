@@ -12,8 +12,11 @@ import (
 	"github.com/spf13/pflag"
 )
 
-//go:embed rt/rt.c
-var rtdata []byte
+//go:embed rt/w2c2-main.c
+var w2c2data []byte
+
+//go:embed rt/uvwasi-main.c
+var wasm2cdata []byte
 
 var verbose = pflag.BoolP("verbose", "V", false, "verbose output")
 
@@ -70,7 +73,7 @@ func main() {
 	incw2c2 := fmt.Sprintf("%s/w2c2", w2c2)
 	incwasi := fmt.Sprintf("%s/wasi", w2c2)
 	lwasi := fmt.Sprintf("%s/wasi/build", w2c2)
-	t, err := template.New("rt").Parse(string(rtdata))
+	t, err := template.New("rt").Parse(string(w2c2data))
 	if err != nil {
 		log.Fatal(err)
 	}
