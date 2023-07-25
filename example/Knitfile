@@ -2,7 +2,7 @@ local sysroot = "/usr/share/wasi-sysroot"
 
 return b{
     $ hello: hello.wasm
-        WASMC_PATH=$$PWD/.. wasmc --flags "-O3" --wasm2c -n hello -o $output $input
+        WASM2BIN=$$PWD/.. wasm2bin --flags "-pthread -ldl" --wasm2c -n hello -o $output $input
     $ hello.wasm: hello.c
         clang -target wasm32-unknown-wasi -O3 $input --sysroot=$sysroot -o $output
 }

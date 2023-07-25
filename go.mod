@@ -1,4 +1,4 @@
-module github.com/zyedidia/wasmc
+module github.com/zyedidia/wasm2bin
 
 go 1.19
 

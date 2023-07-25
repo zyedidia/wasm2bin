@@ -58,15 +58,15 @@ func main() {
 	}
 	in := args[0]
 
-	wasmc := os.Getenv("WASMC_PATH")
+	root := os.Getenv("WASM2BIN")
 	pwd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if *useWasm2c {
-		wabt := filepath.Join(wasmc, "wabt")
-		dir, err := os.MkdirTemp("", "wasmc")
+		wabt := filepath.Join(root, "wabt")
+		dir, err := os.MkdirTemp("", "root")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -95,20 +95,20 @@ func main() {
 		f.Close()
 
 		incwasm2c := filepath.Join(wabt, "wasm2c")
-		uvwasirt := filepath.Join(wasmc, "rt", "uvwasi-rt.c")
+		uvwasirt := filepath.Join(root, "rt", "uvwasi-rt.c")
 		incuvwasi := filepath.Join(wabt, "third_party", "uvwasi", "include")
 		luvwasi := filepath.Join(wabt, "build", "third_party", "uvwasi")
 		luv := filepath.Join(wabt, "build", "_deps", "libuv-build")
 		wasmrt := filepath.Join(wabt, "wasm2c", "wasm-rt-impl.c")
-		incrt := filepath.Join(wasmc, "rt")
+		incrt := filepath.Join(root, "rt")
 
 		run(fmt.Sprintf("%s %s -o %s", filepath.Join(wabt, "build", "wasm2c"), in, cwasm))
 		run(fmt.Sprintf("%s %s -o %s -I%s %s -I%s -L%s -luvwasi_a -L%s -luv_a %s %s -I%s %s", *cc, cwasm, *out, incwasm2c, uvwasirt, incuvwasi, luvwasi, luv, wasmrt, f.Name(), incrt, *flags))
 
 		os.RemoveAll(dir)
 	} else {
-		w2c2 := filepath.Join(wasmc, "w2c2")
-		dir, err := os.MkdirTemp("", "wasmc")
+		w2c2 := filepath.Join(root, "w2c2")
+		dir, err := os.MkdirTemp("", "root")
 		if err != nil {
 			log.Fatal(err)
 		}

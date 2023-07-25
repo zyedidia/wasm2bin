@@ -1,17 +1,17 @@
-# Wasmc
+# Wasm2bin
 
-Wasmc is a Webassembly compiler that compiles Webassembly modules to native
-binaries. It uses either [w2c2](https://github.com/turbolent/w2c2) or
+Wasm2bin is a tool that compiles Webassembly modules to native binaries. It
+uses either [w2c2](https://github.com/turbolent/w2c2) or
 [wasm2c](https://github.com/WebAssembly/wabt/tree/main/wasm2c) to compile
 Webassembly to C, and from there links the code with a WASI runtime to produce
-a native binary. It uses either w2c2's internal WASI runtime, or
-[uvwasi](https://github.com/nodejs/uvwasi).
+a native binary. For w2c2 it uses its internal WASI runtime, and for wasm2c it
+uses [uvwasi](https://github.com/nodejs/uvwasi).
 
 Example usage:
 
 ```
-$ export WASMC_PATH=/path/to/wasmc
-$ wasmc -n hello -o hello hello.wasm
+$ export WASM2BIN=/path/to/wasm2bin-src
+$ wasm2bin -n hello -o hello hello.wasm
 $ ./hello
 hello world!
 ```
@@ -21,9 +21,15 @@ hello world!
 First clone the repository and initialize submodules.
 
 ```
-git clone https://github.com/zyedidia/wasmc
-cd wasmc
+git clone https://github.com/zyedidia/wasm2bin
+cd wasm2bin
 git submodule update --init --recursive
+```
+
+Then build the wrapper tool:
+
+```
+go install
 ```
 
 Now choose the backend you would like to use (w2c2 or wasm2c) and build it.
@@ -59,7 +65,7 @@ Note: uses version 1.0.33 of wasm2c.
 # Usage
 
 ```
-Usage of wasmc:
+Usage of wasm2bin:
       --cc string       C compiler (default "clang")
   -f, --flags string    C compiler flags (default "-O2")
   -n, --name string     module name (default "main")
@@ -69,7 +75,7 @@ Usage of wasmc:
 ```
 
 ```
-$ export WASMC_PATH=/path/to/wasm
-$ wasmc -n hello -o hello hello.wasm          # compile with w2c2
-$ wasmc --wasm2c -n hello -o hello hello.wasm # compile with wasm2c
+$ export WASM2BIN=/path/to/wasm2bin-src
+$ wasm2bin -n hello -o hello hello.wasm          # compile with w2c2
+$ wasm2bin --wasm2c -n hello -o hello hello.wasm # compile with wasm2c
 ```
