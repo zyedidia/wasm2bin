@@ -30,6 +30,10 @@ main(int argc, char* argv[]) {
         fprintf(stderr, "failed to add preopen\n");
         return 1;
     }
+    if (!wasiFileDescriptorAdd(-1, ".", NULL)) {
+        fprintf(stderr, "failed to add preopen\n");
+        return 1;
+    }
 
     {{ .Name }}__start(&instance);
     {{ .Name }}FreeInstance(&instance);
