@@ -83,4 +83,5 @@ $ wasm2bin --wasm2c -n hello -o hello hello.wasm # compile with wasm2c
 Note:
 
 The wasm2c runtime files have been adapted from the
-[wasm2native](https://github.com/vshymanskyy/wasm2native) project.
+[wasm2native](https://github.com/vshymanskyy/wasm2native) project and this
+[pull request](https://github.com/WebAssembly/wabt/pull/2002).
