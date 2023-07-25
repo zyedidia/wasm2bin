@@ -79,3 +79,8 @@ $ export WASM2BIN=/path/to/wasm2bin-src
 $ wasm2bin -n hello -o hello hello.wasm          # compile with w2c2
 $ wasm2bin --wasm2c -n hello -o hello hello.wasm # compile with wasm2c
 ```
+
+Note:
+
+The wasm2c runtime files have been adapted from the
+[wasm2native](https://github.com/vshymanskyy/wasm2native) project.
