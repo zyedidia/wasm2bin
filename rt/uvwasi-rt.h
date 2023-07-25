@@ -4,7 +4,7 @@
 #include "uvwasi.h"
 #include "wasm-rt.h"
 
-struct Z_wasi_snapshot_preview1_instance_t {
+struct w2c_wasi__snapshot__preview1 {
     uvwasi_t * uvwasi;
     wasm_rt_memory_t * instance_memory;
 };

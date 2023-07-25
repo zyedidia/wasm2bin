@@ -103,7 +103,7 @@ func main() {
 		incrt := filepath.Join(wasmc, "rt")
 
 		run(fmt.Sprintf("%s %s -o %s", filepath.Join(wabt, "build", "wasm2c"), in, cwasm))
-		run(fmt.Sprintf("%s %s %s -o %s -I%s %s -I%s -L%s -luvwasi_a -L%s -luv_a %s %s -I%s", *cc, *flags, cwasm, *out, incwasm2c, uvwasirt, incuvwasi, luvwasi, luv, wasmrt, f.Name(), incrt))
+		run(fmt.Sprintf("%s %s -o %s -I%s %s -I%s -L%s -luvwasi_a -L%s -luv_a %s %s -I%s %s", *cc, cwasm, *out, incwasm2c, uvwasirt, incuvwasi, luvwasi, luv, wasmrt, f.Name(), incrt, *flags))
 
 		os.RemoveAll(dir)
 	} else {
@@ -138,7 +138,7 @@ func main() {
 		}
 		f.Close()
 		run(fmt.Sprintf("%s %s %s %s", filepath.Join(w2c2, "build", "w2c2", "w2c2"), in, cwasm, hwasm))
-		run(fmt.Sprintf("%s %s %s %s -L%s -lw2c2wasi -I%s -I%s -I%s -o %s -lm -static", *cc, *flags, cwasm, f.Name(), lwasi, incw2c2, incwasi, pwd, *out))
+		run(fmt.Sprintf("%s %s %s -L%s -lw2c2wasi -I%s -I%s -I%s -o %s -lm -static %s", *cc, cwasm, f.Name(), lwasi, incw2c2, incwasi, pwd, *out, *flags))
 
 		os.RemoveAll(dir)
 	}

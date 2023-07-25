@@ -12,21 +12,21 @@
 #define __module_init(m_name) Z_## m_name ##_init_module()
 #define module_init(m_name) __module_init(m_name)
 
-#define __module_instantiate(m_name, instance_p, wasi_p) Z_## m_name ##_instantiate(instance_p, wasi_p)
+#define __module_instantiate(m_name, instance_p, wasi_p) wasm2c_## m_name ##_instantiate(instance_p, wasi_p)
 #define module_instantiate(m_name ,instance_p, wasi_p) __module_instantiate(m_name ,instance_p, wasi_p)
 
-#define __module_free(m_name, instance_p)  Z_## m_name ##_free(instance_p)
+#define __module_free(m_name, instance_p)  wasm2c_## m_name ##_free(instance_p)
 #define module_free(m_name, instance_p) __module_free(m_name, instance_p)
 
-#define __module_start(m_name, instance_p) Z_ ## m_name ## Z__start(instance_p)
+#define __module_start(m_name, instance_p) w2c_ ## m_name ## _0x5Fstart(instance_p)
 #define module_start(m_name, instance_p) __module_start(m_name, instance_p)
 
 int main(int argc, const char** argv)
 {
-    Z_{{ .Name }}_instance_t local_instance;
+    w2c_{{ .Name }} local_instance;
     uvwasi_t local_uvwasi_state;
 
-    struct Z_wasi_snapshot_preview1_instance_t wasi_state = {
+    struct w2c_wasi__snapshot__preview1 wasi_state = {
 	.uvwasi = &local_uvwasi_state,
 	.instance_memory = &local_instance.w2c_memory
     };
@@ -64,8 +64,8 @@ int main(int argc, const char** argv)
         exit(1);
     }
 
-    module_init(MODULE_NAME);
-    module_instantiate(MODULE_NAME, &local_instance, (struct Z_wasi_snapshot_preview1_instance_t *) &wasi_state);
+    /* module_init(MODULE_NAME); */
+    module_instantiate(MODULE_NAME, &local_instance, (struct w2c_wasi__snapshot__preview1 *) &wasi_state);
     module_start(MODULE_NAME, &local_instance);
     module_free(MODULE_NAME, &local_instance);
 

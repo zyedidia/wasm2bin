@@ -54,8 +54,7 @@ cmake .. -G Ninja -DWITH_WASI=ON
 ninja wasm2c libuvwasi_a.a
 ```
 
-Note: this uses version 1.30.0 of wasm2c. We do not currently support newer
-versions.
+Note: uses version 1.0.33 of wasm2c.
 
 # Usage
 
