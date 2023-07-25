@@ -3,9 +3,9 @@
 Wasm2bin is a tool that compiles Webassembly modules to native binaries. It
 uses either [w2c2](https://github.com/turbolent/w2c2) or
 [wasm2c](https://github.com/WebAssembly/wabt/tree/main/wasm2c) to compile
-Webassembly to C, and from there links the code with a WASI runtime to produce
-a native binary. For w2c2 it uses its internal WASI runtime, and for wasm2c it
-uses [uvwasi](https://github.com/nodejs/uvwasi).
+Webassembly to C, and from there calls a C compiler and links the code with a
+WASI runtime to produce a native binary. For w2c2 it uses its internal WASI
+runtime, and for wasm2c it uses [uvwasi](https://github.com/nodejs/uvwasi).
 
 Example usage:
 
