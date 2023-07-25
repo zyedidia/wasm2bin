@@ -37,8 +37,9 @@ cd w2c2
 cmake -B build
 cmake --build build
 
-cmake -B wasi/build
-cmake --build wasi/build
+cd wasi
+cmake -B build
+cmake --build build
 ```
 
 ## Wasm2c

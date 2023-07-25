@@ -1,4 +1,6 @@
 return b{
+    $ hello: hello.wasm
+        WASMC_PATH=$$PWD/.. wasmc --flags "-O3" --wasm2c -n hello -o $output $input
     $ hello.wasm: hello.c
-        clang -target wasm32-unknown-wasi -O3 $input --sysroot=/home/zyedidia/Downloads/wasi-sysroot -o $output -c
+        clang -target wasm32-unknown-wasi -O3 $input --sysroot=/usr/share/wasi-sysroot -o $output
 }
