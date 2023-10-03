@@ -26,7 +26,7 @@ main(int argc, char* argv[]) {
         return 1;
     }
 
-    if (!wasiFileDescriptorAdd(-1, "/", NULL)) {
+    if (!wasiFileDescriptorAdd(-1, "/home", NULL)) {
         fprintf(stderr, "failed to add preopen\n");
         return 1;
     }

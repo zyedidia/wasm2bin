@@ -1,5 +1,6 @@
 #include <stdio.h>
 int main() {
-    printf("hi\n");
+    printf("%p\n", fopen("/home/zyedidia/wasm.txt", "rb"));
+    printf("%p\n", fopen("hello.c", "rb"));
     return 0;
 }
