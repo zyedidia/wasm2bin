@@ -138,7 +138,9 @@ func main() {
 		}
 		f.Close()
 		run(fmt.Sprintf("%s %s %s %s", filepath.Join(w2c2, "build", "w2c2", "w2c2"), in, cwasm, hwasm))
-		run(fmt.Sprintf("%s %s %s -L%s -lw2c2wasi -I%s -I%s -I%s -o %s -lm -static %s", *cc, cwasm, f.Name(), lwasi, incw2c2, incwasi, pwd, *out, *flags))
+		run(fmt.Sprintf("%s %s -c -o %s.o -I%s -I%s -I%s %s", *cc, cwasm, cwasm, incw2c2, incwasi, pwd, *flags))
+		run(fmt.Sprintf("%s %s -c -o %s.o -I%s -I%s -I%s %s", *cc, f.Name(), f.Name(), incw2c2, incwasi, pwd, *flags))
+		run(fmt.Sprintf("%s %s.o %s.o -L%s -lw2c2wasi -o %s -lm -static %s", *cc, cwasm, f.Name(), lwasi, *out, *flags))
 
 		os.RemoveAll(dir)
 	}
