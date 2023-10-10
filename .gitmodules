@@ -3,4 +3,4 @@
 	url = https://github.com/turbolent/w2c2
 [submodule "wabt"]
 	path = wabt
-	url = https://github.com/WebAssembly/wabt
+	url = https://github.com/zyedidia/wabt
