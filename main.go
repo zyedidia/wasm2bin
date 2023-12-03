@@ -101,9 +101,10 @@ func main() {
 		luv := filepath.Join(wabt, "build", "_deps", "libuv-build")
 		wasmrt := filepath.Join(wabt, "wasm2c", "wasm-rt-impl.c")
 		incrt := filepath.Join(root, "rt")
+		incsimd := filepath.Join(wabt, "third_party", "simde")
 
 		run(fmt.Sprintf("%s %s -o %s", filepath.Join(wabt, "build", "wasm2c"), in, cwasm))
-		run(fmt.Sprintf("%s %s -o %s -I%s %s -I%s -L%s -luvwasi_a -L%s -luv_a %s %s -I%s %s", *cc, cwasm, *out, incwasm2c, uvwasirt, incuvwasi, luvwasi, luv, wasmrt, f.Name(), incrt, *flags))
+		run(fmt.Sprintf("%s %s -o %s -I%s -I%s %s -I%s -L%s -luvwasi_a -L%s -luv_a -lm %s %s -I%s %s", *cc, cwasm, *out, incsimd, incwasm2c, uvwasirt, incuvwasi, luvwasi, luv, wasmrt, f.Name(), incrt, *flags))
 
 		os.RemoveAll(dir)
 	} else {

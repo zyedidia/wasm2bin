@@ -13,7 +13,6 @@ import (
 
 func run(cmd string, args ...string) {
 	c := exec.Command(cmd, args...)
-	fmt.Println(c)
 	log.Println(c)
 	c.Stdout = os.Stdout
 	c.Stdin = os.Stdin
@@ -41,8 +40,12 @@ func main() {
 			link = false
 		}
 		switch arg {
-		case "-cxx":
-			clang = "clang++"
+		case "-compiler":
+			if i+1 >= len(os.Args) {
+				log.Fatal("-o needs an argument")
+			}
+			clang = os.Args[i+1]
+			i++
 		case "-c":
 			link = false
 			args = append(args, arg)
