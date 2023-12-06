@@ -82,7 +82,8 @@ func main() {
 		flags = fmt.Sprintf("-n %s", module)
 	}
 	in := out + "_base.wasm"
+	opt := out + "_base.opt.wasm"
 	run("cp", out, in)
 
-	run("sh", "-c", fmt.Sprintf("%s %s -o %s %s", postlink, flags, out, in))
+	run("sh", "-c", fmt.Sprintf("wasm-opt -O3 %s -o %s; %s %s -o %s %s", in, opt, postlink, flags, out, in))
 }

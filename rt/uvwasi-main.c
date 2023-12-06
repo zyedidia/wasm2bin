@@ -49,8 +49,8 @@ int main(int argc, const char** argv)
     init_options.preopenc = 2;
     init_options.preopens = calloc(2, sizeof(uvwasi_preopen_t));
 
-    init_options.preopens[0].mapped_path = "/";
-    init_options.preopens[0].real_path = "/";
+    init_options.preopens[0].mapped_path = "/home";
+    init_options.preopens[0].real_path = "/home";
     init_options.preopens[1].mapped_path = "./";
     init_options.preopens[1].real_path = ".";
 
