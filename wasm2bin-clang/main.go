@@ -77,9 +77,11 @@ func main() {
 		flags = fmt.Sprintf("-n %s", module)
 	} else if strings.Contains(postlink, "wamrc") {
 		flags = "--target=aarch64"
-	} else {
+	} else if strings.Contains(postlink, "w2c2") {
 		module := strings.ReplaceAll(out, "_", "") + "base"
 		flags = fmt.Sprintf("-n %s", module)
+	} else if strings.Contains(postlink, "wasmtime") {
+		// nothing to do
 	}
 	in := out + "_base.wasm"
 	opt := out + "_base.opt.wasm"
