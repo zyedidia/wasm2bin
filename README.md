@@ -53,7 +53,7 @@ cmake --build build
 Build Wasm2c:
 
 ```
-cd wasm2c
+cd wabt
 mkdir build
 cd build
 cmake .. -G Ninja -DWITH_WASI=ON
